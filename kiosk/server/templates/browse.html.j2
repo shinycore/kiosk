@@ -18,7 +18,14 @@
             <ul>
                 <li>ID: {{ entry.id }}</li>
                 <li>Price: {{ entry.price }}</li>
-                <li>Product IDs: {{ entry.product_ids }}</li>
+                <li>Products:
+                    <ul>
+                        {% for pid, product in entry.products %}
+                            <li>{{ product }} ({{ pid }})</li>
+                        {% endfor %}
+                    </ul>
+                    {{ entry.product_ids }}
+                </li>
             </ul>
         </div>
     {% endfor %}

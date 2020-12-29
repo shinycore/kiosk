@@ -5,8 +5,10 @@ from typing import List
 from flask import Flask, abort, render_template, request
 
 from kiosk.server.storage import Storage
+from kiosk.utils import get_product_names
 
 storage = Storage()
+product_names = get_product_names()
 
 
 def add_entry():
@@ -35,7 +37,10 @@ def delete_entry(idx: int):
 
 def browse():
     entries = [
-        {"id": id_, "date": entry.date, "price": entry.price, "product_ids": entry.product_ids}
+        {
+            "id": id_, "date": entry.date, "price": entry.price,
+            "products": [(pid, product_names[pid]) for pid in entry.product_ids]
+        }
         for id_, entry in storage.to_dict().items()
     ]
 

@@ -11,6 +11,8 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.togglebutton import ToggleButton
 
+from kiosk.utils import get_product_names
+
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
 
@@ -80,8 +82,8 @@ class EditScreen(Screen):
 
         products_keypad: GridLayout = self.ids.products_keypad
 
-        for id_ in range(6):
-            button = ToggleButton(text=f"Product {id_ + 1}")
+        for id_, name in enumerate(get_product_names()):
+            button = ToggleButton(text=name)
             button.on_press = lambda id_copy=id_, button_copy=button: self._toggle_product_id(id_copy, button_copy)
             products_keypad.add_widget(button)
 
