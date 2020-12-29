@@ -11,7 +11,7 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import NoTransition, Screen, ScreenManager
 from kivy.uix.togglebutton import ToggleButton
 
-from ..utils import get_product_names
+from ..utils import get_ip_address, get_product_names
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
@@ -101,7 +101,15 @@ class EditScreen(Screen):
 
 
 class ListScreen(Screen):
-    pass
+    @staticmethod
+    def _show_ip_address():
+        ip_address = get_ip_address()
+        if ip_address:
+            text = f"This device's IP address is {ip_address}"
+        else:
+            text = "This device is not connected to any network"
+
+        StatusModalView(text=text).open()
 
 
 class KioskApp(App):
