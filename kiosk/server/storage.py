@@ -62,7 +62,7 @@ class Storage:
         self._write()
 
     def append(self, price: int, product_ids: List[int]):
-        self.data.append(StorageEntry(price, product_ids))
+        self.data.append(StorageEntry(price, sorted(product_ids)))
         self._write()
 
     def to_dict(self) -> Mapping[int, StorageEntry]:
