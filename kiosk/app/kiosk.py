@@ -39,7 +39,10 @@ class EditScreen(Screen):
 
     product_count = AliasProperty(lambda self: len(self.product_ids), bind=("product_ids",))
 
-    def _add_price_char(self, char: str):
+    def _add_price_char(self, char: str, max_chars: int = 4):
+        if len(str(self.price)) >= max_chars:
+            return
+
         try:
             self.price = int(f"{self.price}{char}")
         except ValueError:
