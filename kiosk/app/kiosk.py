@@ -17,14 +17,6 @@ Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
 
 
-def _submit_succeeded(request, result):
-    StatusModalView(text="Success").open()
-
-
-def _submit_failed(request, result):
-    StatusModalView(text="Failure").open()
-
-
 class StatusModalView(ModalView):
     text = StringProperty()
     prev = None
@@ -68,6 +60,19 @@ class EditScreen(Screen):
         elif button.state == "down":
             self.product_ids[id_] = None
 
+    def _submit_succeeded(self, *args):
+        self.price = 0
+        self.product_ids = dict()
+
+        for button in self.ids.products_keypad.children:
+            button.state = "normal"
+
+        StatusModalView(text="Success").open()
+
+    @staticmethod
+    def _submit_failed(*args):
+        StatusModalView(text="Failure").open()
+
     def build(self):
         price_keypad: GridLayout = self.ids.price_keypad
 
@@ -94,9 +99,9 @@ class EditScreen(Screen):
             method="POST",
             req_body=json.dumps({"price": self.price, "product_ids": list(self.product_ids.keys())}),
             req_headers={"Content-Type": "application/json"},
-            on_success=_submit_succeeded,
-            on_failure=_submit_failed,
-            on_error=_submit_failed,
+            on_success=self._submit_succeeded,
+            on_failure=self._submit_failed,
+            on_error=self._submit_failed,
         )
 
 
