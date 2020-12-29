@@ -1,3 +1,51 @@
 body {
     font-family: "-apple-system", "system-ui", "Arial", sans-serif;
+    margin: 16px;
+    max-width: 312px;
+}
+
+main {
+    column-gap: 8px;
+    display: grid;
+    row-gap: 8px;
+}
+
+section {
+    border: 1px solid black;
+}
+
+@media (min-width: 360px) {
+    body {
+        margin: 16px auto;
+    }
+}
+
+@media (min-width: 672px) {
+    body {
+        max-width: 632px;
+    }
+
+    main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    body {
+        max-width: 952px;
+    }
+
+    main {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1312px) {
+    body {
+        max-width: 1272px;
+    }
+
+    main {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
