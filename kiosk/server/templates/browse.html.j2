@@ -7,7 +7,7 @@
     </style>
 </head>
 <body>
-    <p><b>Current time: {{ now.astimezone() }}</b></p>
+    <p>Downloaded on {{ now.astimezone() }}</p>
     <main>
         {% for entry in entries %}
             <section id="entry{{ entry.id }}">
