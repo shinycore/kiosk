@@ -1,12 +1,117 @@
-# Kiosk
+# 🛒 Kiosk App
 
-## Compile translation files
+This application can be used to store basic details about upcoming orders (price and product categories as of now).
 
-```bash
-$ pybabel compile -d kiosk/translations
-```
+For a prototyping phase, these software components were developed:
 
-## Third party licenses
+- Kivy application (add entries, get device's IP address)
+- Flask server (browse and remove entries)
+
+## 📷 Photo evidence
+
+Kivy application       | Flask server
+-----------------------|------------------------
+![](assets/photo0.jpg) | ![](assets/photo1.png)
+
+## 🎥 Video evidence
+
+[YouTube video](https://www.youtube.com/watch?v=87SKZhJLGwI)
+
+## 📐 Design goals and implementation status
+
+✔️ Use compact, cheap and energy-efficient hardware
+
+- Raspberry Pi Zero W
+- Small (3.5") SPI display, with resistive touch panel
+
+✔️ Provide touch-enabled user interface using ~~web technologies~~ native solutions
+
+- Kivy as a GUI framework
+- Custom UI widgets, such as ImageButton
+- Network progress indicators and human-friendly messages
+
+✔️ Provide simple web application
+
+- Server-side rendering with Flask and a bit of JavaScript
+- A responsive layout with CSS Grid, media queries and custom theme
+
+✔️ Support multiple languages, with English as a default
+
+✔️ Load some settings from a configuration file
+
+- Category names
+
+❌ Save data to EEPROM memory
+
+- CSV file with compressed data is stored on SD card, no EEPROM support yet
+
+## 🕵️ Post-apocalyptic analysis
+
+TL;DR: I wish I had picked HDMI display instead.
+
+**Performance**
+
+Web application (React) isn't going to be accepted, because Chromium does not support hardware-accelerated rendering.
+Actually, I wouldn't recommend using Xorg (graphics server) on Raspberry Pi Zero at all. I doubt there's anyone who
+would spend $30 total on a hardware, only to get 1-2s delays!
+
+*laughs in Intel and their GPU drivers*
+
+**GUI design, attempt #2**
+
+There aren't many GUI frameworks that can be used without Xorg. Kivy is good (enough), however it takes *entire forever*
+to design anything because [inspector is broken](https://github.com/kivy/kivy/issues/7214) and so is the git version.
+
+**Hardware issues**
+
+Device tree overlay for my SPI display was broken and I [had to fix it](https://github.com/shinycore/uctronics_hslcd35).
+Now Xorg is fine, but Kivy is not (touch screen's Y axis is inverted). My initial idea was to edit DTO once again and
+flip Y values. Now both axes are flipped. 🙃 *The reason? It's quite obvious! This `ti,swap-xy` is to blame.*
+
+**A nail in the coffin**
+
+SPI displays do not support hardware acceleration at all! There's a `fbcp` program, but here's a catch - every single
+rendered frame needs to be copied using CPU, even if nothing has changed. Energy efficiency was the main reason for
+using Raspberry Pi Zero, it cannot be sacrificed.
+
+## ⚙️ Installation
+
+This is a prototype. That's why it is fine to use system interpreter, Flask dev server, and quick-n-dirty bash scripts.
+
+**Operating system**
+
+1. Install Raspberry Pi OS. 2020-12-04 "Lite" release works correctly and so should the later ones.
+1. Set up locale, keyboard, Wi-Fi and other stuff using `raspi-config`
+1. Install SPI display drivers. Good luck on doing that.
+1. Make sure `fbcp` is **not** present in `/etc/rc.local`
+1. Install packages: `sudo apt install git libsdl2{,-image,-mixer,-ttf}-dev python3-pip`
+1. Install Poetry: `pip3 install poetry`
+
+**Kiosk App itself**
+
+1. Clone repository
+1. Generate requirements.txt: `~/.local/bin/poetry export --without-hashes > requirements.txt`
+1. Install dependencies: `pip3 install -r requirements.txt`
+1. Compile translations: `~/.local/bin/pybabel compile -d kiosk/translations`
+1. Create `/boot/kiosk.sh` file:
+    ```bash
+    cd ~/kiosk
+    clear
+    
+    fbcp &
+    # exit
+    ~/.local/bin/flask run -h 0.0.0.0 &
+    python3 main.py
+    ```
+1. Add to `~/.bash_profile` file:
+    ```bash
+    bash /boot/kiosk.sh
+    ```
+1. Reboot
+
+If you run into any trouble, you can edit `kiosk.sh` on the first partition of SD card.
+
+## 📜 Third party licenses
 
 ### Material Design Icons font, Roboto font families
 
