@@ -8,15 +8,15 @@
 </head>
 <body>
     <header>
-        <h1>{{ entries | length }} entries</h1>
-        Downloaded on {{ now.astimezone() }}
+        <h1>{{ entries | length }} {{ _("entries") }}</h1>
+        {{ _("Downloaded on") }} {{ now.astimezone() }}
     </header>
     <main>
         {% for entry in entries %}
             <section id="entry{{ entry.id }}">
                 <span class="entry-id">#{{ entry.id }}</span>
                 <span class="entry-date">{{ entry.date }}</span>
-                <button class="entry-button" onclick="del({{ entry.id }})">Delete</button>
+                <button class="entry-button" onclick="del({{ entry.id }})">{{ _("Delete") }}</button>
                 <span class="entry-price">{{ entry.price }}</span>
 
                 <ul class="entry-products">
@@ -28,8 +28,8 @@
         {% endfor %}
     </main>
     <footer>
-        Copyright &copy 2020-2021 &vert; Some components of this software are
-        <a href="https://github.com/shinycore/kiosk" target="_blank">open-source</a>
+        Copyright &copy 2020-2021 &vert;
+        <a href="https://github.com/shinycore/kiosk" target="_blank">Open source components</a>
     </footer>
 
     <script type="text/javascript">

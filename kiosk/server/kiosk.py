@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import List
 
 from flask import Flask, abort, render_template, request
+from flask_babel import Babel
 
 from ..utils import get_product_names
 from .storage import Storage
@@ -52,9 +53,14 @@ def browse():
 def create_app():
     app = Flask(__name__)
 
+    app.config["BABEL_TRANSLATION_DIRECTORIES"] = "../translations"
+
     app.add_url_rule("/", browse.__name__, browse, methods=("GET",))
 
     app.add_url_rule("/", add_entry.__name__, add_entry, methods=("POST",))
     app.add_url_rule("/entry/<int:idx>", delete_entry.__name__, delete_entry, methods=("DELETE",))
+
+    babel = Babel(app)
+    babel.localeselector(lambda: request.accept_languages.best_match(("en", "pl")))
 
     return app

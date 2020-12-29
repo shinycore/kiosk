@@ -1,5 +1,11 @@
 # Kiosk
 
+## Compile translation files
+
+```bash
+$ pybabel compile -d kiosk/translations
+```
+
 ## Third party licenses
 
 ### Roboto font
