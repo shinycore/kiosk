@@ -18,7 +18,7 @@
 
                 <ul class="entry-products">
                     {% for pid, product in entry.products %}
-                        <li>#{{ pid }} {{ product }}</li>
+                        <li><span class="product-id">#{{ pid }}</span> {{ product }}</li>
                     {% endfor %}
                 </ul>
             </section>
