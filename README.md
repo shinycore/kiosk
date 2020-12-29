@@ -8,7 +8,7 @@ $ pybabel compile -d kiosk/translations
 
 ## Third party licenses
 
-### Roboto font
+### Roboto font families
 
 ```
                                  Apache License
