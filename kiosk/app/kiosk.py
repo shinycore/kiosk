@@ -8,7 +8,7 @@ from kivy.properties import AliasProperty, DictProperty, NumericProperty, String
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.modalview import ModalView
-from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
+from kivy.uix.screenmanager import NoTransition, Screen, ScreenManager
 from kivy.uix.togglebutton import ToggleButton
 
 from kiosk.utils import get_product_names
@@ -95,7 +95,7 @@ class EditScreen(Screen):
             req_body=json.dumps({"price": self.price, "product_ids": list(self.product_ids.keys())}),
             req_headers={"Content-Type": "application/json"},
             on_success=_submit_succeeded,
-            on_failure=_submit_failed
+            on_failure=_submit_failed,
         )
 
 

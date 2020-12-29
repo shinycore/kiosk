@@ -38,7 +38,7 @@ class Storage:
                     StorageEntry(
                         date=datetime.fromtimestamp(int(entry[0])),
                         price=int(entry[1]),
-                        product_ids=_int_to_id_list(int(entry[2]))
+                        product_ids=_int_to_id_list(int(entry[2])),
                     )
                     for entry in csv.reader(f)
                 ]

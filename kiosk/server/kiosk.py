@@ -38,8 +38,10 @@ def delete_entry(idx: int):
 def browse():
     entries = [
         {
-            "id": id_, "date": entry.date, "price": entry.price,
-            "products": [(pid, product_names[pid]) for pid in entry.product_ids]
+            "id": id_,
+            "date": entry.date,
+            "price": entry.price,
+            "products": [(pid, product_names[pid]) for pid in entry.product_ids],
         }
         for id_, entry in storage.to_dict().items()
     ]

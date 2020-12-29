@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ -d .venv ]
+then
+    PATH=$PWD/.venv/bin:$PATH
+fi
+
+set -e
+black --check kiosk
+flakehell lint kiosk
+isort --check kiosk
