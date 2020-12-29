@@ -1,6 +1,6 @@
 from kivy import Config
 from kivy.app import App
-from kivy.properties import DictProperty, NumericProperty
+from kivy.properties import AliasProperty, DictProperty, NumericProperty
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.togglebutton import ToggleButton
@@ -12,6 +12,8 @@ Config.set("graphics", "height", 320)
 class KioskApp(App):
     price = NumericProperty()
     product_ids = DictProperty()  # there's no SetProperty, this is the closest match
+
+    product_count = AliasProperty(lambda self: len(self.product_ids), bind=("product_ids",))
 
     def _add_price_char(self, char: str):
         try:
