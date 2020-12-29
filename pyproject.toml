@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "kiosk"
+version = "0.1.0"
+description = ""
+authors = ["shinycore"]
+license = "ISC"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+kivy = "^2.0.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

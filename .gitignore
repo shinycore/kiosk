@@ -1,0 +1,6 @@
+# Runtime
+.venv/
+__pycache__/
+
+# IDE
+.idea/
