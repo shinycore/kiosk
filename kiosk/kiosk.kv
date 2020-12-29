@@ -14,7 +14,12 @@ BoxLayout:
         Button:
             text: "Submit"
 
-    GridLayout:
-        id: price_keypad
-        cols: 4
+    Carousel:
         size_hint_y: 0.9
+
+        GridLayout:
+            id: price_keypad
+            cols: 4
+        GridLayout:
+            id: products_keypad
+            cols: 2
