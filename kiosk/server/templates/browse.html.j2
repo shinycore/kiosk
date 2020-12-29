@@ -30,7 +30,7 @@
             fetch("/entry/" + idx, {method: "DELETE"}).then((res) => {
                 if (res.ok) {
                     const section = document.getElementById("entry" + idx);
-                    section.style.color = "lightgray";
+                    section.classList.add("deleted");
                 }
             });
         }
