@@ -1,3 +1,22 @@
+<KProgressIndicator>:
+    canvas.before:
+        PushMatrix
+        Rotate:
+            angle: self.angle
+            axis: 0, 0, 1
+            origin: self.center
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 0.85
+        Line:
+            width: 1.5
+            circle: self.center_x, self.center_y, min(self.width, self.height) / 3, 0, 90
+        Line:
+            width: 1.5
+            circle: self.center_x, self.center_y, min(self.width, self.height) / 3, 180, 270
+    canvas.after:
+        PopMatrix
+
 <KBasePopup>:
     auto_dismiss: False
     padding: 8
@@ -11,6 +30,16 @@
         Rectangle:
             pos: self.pos
             size: self.size
+
+<KLoadingPopup>:
+    id: k_loading_popup
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: k_loading_popup.text
+        KProgressIndicator:
 
 <KStatusPopup>:
     id: k_status_popup

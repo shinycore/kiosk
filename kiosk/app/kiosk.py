@@ -9,7 +9,7 @@ from kivy.uix.screenmanager import NoTransition, Screen, ScreenManager
 
 from ..utils import get_ip_address, get_product_names
 from .components.button import KButton, KIconButton, KToggleButton
-from .components.popup import KStatusPopup
+from .components.popup import KLoadingPopup, KStatusPopup
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
@@ -52,11 +52,11 @@ class EditScreen(Screen):
         for button in self.ids.products_keypad.children:
             button.state = "normal"
 
-        KStatusPopup(text="Success").open()
+        KStatusPopup(text="Saved").open()
 
     @staticmethod
     def _submit_failed(*args):
-        KStatusPopup(text="Failure").open()
+        KStatusPopup(text="Could not save").open()
 
     def build(self):
         price_keypad: GridLayout = self.ids.price_keypad
@@ -82,7 +82,7 @@ class EditScreen(Screen):
             products_keypad.add_widget(button)
 
     def submit(self):
-        KStatusPopup(text="Please wait...").open()
+        KLoadingPopup(text="Saving").open()
         UrlRequest(
             "http://localhost:5000",
             method="POST",
