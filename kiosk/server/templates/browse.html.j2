@@ -7,7 +7,10 @@
     </style>
 </head>
 <body>
-    <header>Downloaded on {{ now.astimezone() }}</header>
+    <header>
+        <h1>{{ entries | length }} entries</h1>
+        Downloaded on {{ now.astimezone() }}
+    </header>
     <main>
         {% for entry in entries %}
             <section id="entry{{ entry.id }}">
