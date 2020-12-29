@@ -1,4 +1,4 @@
-from kiosk.server.kiosk import create_app
+from .kiosk import create_app
 
 server = create_app()
 

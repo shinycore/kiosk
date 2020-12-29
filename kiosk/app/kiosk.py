@@ -11,7 +11,7 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import NoTransition, Screen, ScreenManager
 from kivy.uix.togglebutton import ToggleButton
 
-from kiosk.utils import get_product_names
+from ..utils import get_product_names
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)

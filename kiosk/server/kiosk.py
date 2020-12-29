@@ -4,8 +4,8 @@ from typing import List
 
 from flask import Flask, abort, render_template, request
 
-from kiosk.server.storage import Storage
-from kiosk.utils import get_product_names
+from ..utils import get_product_names
+from .storage import Storage
 
 storage = Storage()
 product_names = get_product_names()

@@ -1,4 +1,4 @@
-from kiosk.app.kiosk import KioskApp
+from .kiosk import KioskApp
 
 app = KioskApp()
 
