@@ -1,21 +1,9 @@
 #:include kiosk/app/components/button.kv
+#:include kiosk/app/components/popup.kv
 
 <Widget>:
     font_name: "kiosk/app/fonts/RobotoCondensed-Regular.ttf"
     font_size: dp(32)
-
-<StatusModalView>:
-    id: status_modal
-    auto_dismiss: False
-
-    BoxLayout:
-        orientation: "vertical"
-
-        Label:
-            text: status_modal.text
-        KButton:
-            text: "OK"
-            on_press: status_modal.dismiss()
 
 <EditScreen>:
     id: edit_screen
@@ -94,7 +82,7 @@
                 text_size: root.width, None
             KButton:
                 on_press: root._show_ip_address()
-                text: "Show my IP address"
+                text: "Show my IP address(es)"
             Label:
                 halign: "center"
                 text: "Make sure you are in the same network"

@@ -1,35 +1,18 @@
 import json
-import weakref
 
 from kivy import Config
 from kivy.app import App
 from kivy.network.urlrequest import UrlRequest
-from kivy.properties import AliasProperty, DictProperty, NumericProperty, StringProperty
+from kivy.properties import AliasProperty, DictProperty, NumericProperty
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import NoTransition, Screen, ScreenManager
 
 from ..utils import get_ip_address, get_product_names
 from .components.button import KButton, KIconButton, KToggleButton
+from .components.popup import KStatusPopup
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
-
-
-class StatusModalView(ModalView):
-    text = StringProperty()
-    prev = None
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-        ref = StatusModalView.prev  # no walruses in 3.7
-        if ref:
-            modal: "StatusModalView" = ref()
-            if modal:
-                modal.dismiss()
-
-        StatusModalView.prev = weakref.ref(self)
 
 
 class EditScreen(Screen):
@@ -69,11 +52,11 @@ class EditScreen(Screen):
         for button in self.ids.products_keypad.children:
             button.state = "normal"
 
-        StatusModalView(text="Success").open()
+        KStatusPopup(text="Success").open()
 
     @staticmethod
     def _submit_failed(*args):
-        StatusModalView(text="Failure").open()
+        KStatusPopup(text="Failure").open()
 
     def build(self):
         price_keypad: GridLayout = self.ids.price_keypad
@@ -99,7 +82,7 @@ class EditScreen(Screen):
             products_keypad.add_widget(button)
 
     def submit(self):
-        StatusModalView(text="Please wait...").open()
+        KStatusPopup(text="Please wait...").open()
         UrlRequest(
             "http://localhost:5000",
             method="POST",
@@ -116,11 +99,11 @@ class ListScreen(Screen):
     def _show_ip_address():
         ip_address = get_ip_address()
         if ip_address:
-            text = f"This device's IP address is {ip_address}"
+            text = f"{ip_address}"
         else:
-            text = "This device is not connected to any network"
+            text = "No network connection"
 
-        StatusModalView(text=text).open()
+        KStatusPopup(text=text).open()
 
 
 class KioskApp(App):

@@ -1,0 +1,25 @@
+<KBasePopup>:
+    auto_dismiss: False
+    padding: 8
+    pos_hint: {"x": 0, "y": 0.5}
+    size_hint: 1, 0.5
+
+    # default background is the same as button's one and looks ugly
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<KStatusPopup>:
+    id: k_status_popup
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: k_status_popup.text
+        KButton:
+            on_press: k_status_popup.dismiss()
+            text: "OK"
