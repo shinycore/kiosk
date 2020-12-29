@@ -2,7 +2,7 @@ import csv
 from dataclasses import dataclass, field
 from datetime import datetime
 from functools import reduce
-from typing import List
+from typing import Iterator, List
 
 
 def _id_list_to_int(list_: List[int]) -> int:
@@ -18,7 +18,7 @@ class StorageEntry:
     price: int
     product_ids: List[int]
 
-    date: datetime = field(default_factory=datetime.now)
+    date: datetime = field(default_factory=lambda: datetime.now().replace(microsecond=0))
 
 
 class Storage:
@@ -47,6 +47,9 @@ class Storage:
             csv.writer(f).writerows(
                 [(int(q.date.timestamp()), q.price, _id_list_to_int(q.product_ids)) for q in self.data]
             )
+
+    def __iter__(self) -> Iterator[StorageEntry]:
+        return iter(self.data)
 
     def append(self, price: int, product_ids: List[int]):
         self.data.append(StorageEntry(price, product_ids))

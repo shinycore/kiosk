@@ -1,7 +1,8 @@
 import http
+from datetime import datetime
 from typing import List
 
-from flask import Flask, request, abort
+from flask import Flask, abort, render_template, request
 
 from kiosk.server.storage import Storage
 
@@ -23,8 +24,14 @@ def add_entry():
     return "", http.HTTPStatus.CREATED
 
 
+def browse():
+    return render_template("browse.html.j2", storage=storage, now=datetime.now().replace(microsecond=0))
+
+
 def create_app():
     app = Flask(__name__)
+
+    app.add_url_rule("/", browse.__name__, browse, methods=("GET",))
 
     app.add_url_rule("/", add_entry.__name__, add_entry, methods=("POST",))
 
