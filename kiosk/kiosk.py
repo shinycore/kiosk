@@ -3,7 +3,7 @@ from kivy.app import App
 from kivy.properties import AliasProperty, DictProperty, NumericProperty
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.togglebutton import ToggleButton
 
 Config.set("graphics", "width", 480)
@@ -57,10 +57,15 @@ class EditScreen(Screen):
             products_keypad.add_widget(button)
 
 
+class ListScreen(Screen):
+    pass
+
+
 class KioskApp(App):
     def build(self):
-        sm = ScreenManager()
+        sm = ScreenManager(transition=NoTransition())
         sm.add_widget(EditScreen(name="edit"))
+        sm.add_widget(ListScreen(name="list"))
 
         sm.get_screen("edit").build()
 

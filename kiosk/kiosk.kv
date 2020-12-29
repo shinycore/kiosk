@@ -10,6 +10,7 @@
 
             Button:
                 text: "List"
+                on_press: app.root.current = "list"
             Button:
                 text: str(edit_screen.price)
                 on_press: carousel.index = 0
@@ -30,3 +31,37 @@
             GridLayout:
                 id: products_keypad
                 cols: 2
+
+<ListScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
+
+            Button:
+                text: "Edit"
+                on_press: app.root.current = "edit"
+            Widget:
+            Widget:
+            Widget:
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.9
+
+            Widget:
+            Label:
+                halign: "center"
+                text: "Please open web browser and navigate to"
+                text_size: root.width, None
+            Label:
+                halign: "center"
+                text: "http://---.---.---.---"
+                text_size: root.width, None
+            Label:
+                halign: "center"
+                text: "Make sure you are in the same network"
+                text_size: root.width, None
+            Widget:
