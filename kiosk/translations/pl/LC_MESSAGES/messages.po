@@ -11,8 +11,12 @@ msgstr ""
 "Generated-By: Babel 2.9.0\n"
 
 #: kiosk/server/templates/browse.html.j2:11
-msgid "entries"
-msgstr "wpisów"
+#, python-format
+msgid "%(num)d entry"
+msgid_plural "%(num)d entries"
+msgstr[0] "%(num)d wpis"
+msgstr[1] "%(num)d wpisy"
+msgstr[2] "%(num)d wpisów"
 
 #: kiosk/server/templates/browse.html.j2:12
 msgid "Downloaded on"

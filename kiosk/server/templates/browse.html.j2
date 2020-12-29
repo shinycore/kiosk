@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>{{ entries | length }} {{ _("entries") }}</h1>
+        <h1>{{ ngettext("%(num)d entry", "%(num)d entries", entries | length) }}</h1>
         {{ _("Downloaded on") }} {{ now.astimezone() }}
     </header>
     <main>
