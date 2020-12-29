@@ -96,6 +96,7 @@ class EditScreen(Screen):
             req_headers={"Content-Type": "application/json"},
             on_success=_submit_succeeded,
             on_failure=_submit_failed,
+            on_error=_submit_failed,
         )
 
 
