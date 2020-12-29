@@ -1,3 +1,4 @@
-from kiosk import KioskApp
+from kiosk.app import app
 
-KioskApp().run()
+if __name__ == '__main__':
+    app.run()
