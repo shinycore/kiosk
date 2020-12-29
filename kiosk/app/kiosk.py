@@ -76,9 +76,13 @@ class EditScreen(Screen):
     def build(self):
         price_keypad: GridLayout = self.ids.price_keypad
 
-        for char in "7890456.123":
-            button = Button(text=char)
-            button.on_press = lambda char_copy=char: self._add_price_char(char_copy)
+        for char in (7, 8, 9, 0, 4, 5, 6, None, 1, 2, 3):
+            if char is None:
+                button = Button()
+            else:
+                button = Button(text=str(char))
+                button.on_press = lambda char_copy=char: self._add_price_char(char_copy)
+
             price_keypad.add_widget(button)
 
         button = Button(text="Backspace")
