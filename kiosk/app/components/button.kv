@@ -11,25 +11,22 @@
             source: self.background_normal if self.state == "normal" else self.background_down
 
 <KButton, KToggleButton>:
-    id: k_button
-
     Label:
         halign: "center"
-        text: k_button.text
+        text: root.text
         text_size: self.width, None
 
 <KIconButton>:
-    id: k_icon_button
-    spacing: 8 if k_icon_button.text is not "" else 0
+    spacing: 8 if root.text is not "" else 0
 
     Widget:
     Label:
         font_name: "kiosk/app/fonts/MaterialIconsOutlined-Regular.otf"
         size: self.texture_size
         size_hint_x: None
-        text: k_icon_button.icon_text
+        text: root.icon_text
     Label:
         size: self.texture_size
         size_hint_x: None
-        text: k_icon_button.text
+        text: root.text
     Widget:

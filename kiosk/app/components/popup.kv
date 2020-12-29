@@ -32,23 +32,19 @@
             size: self.size
 
 <KLoadingPopup>:
-    id: k_loading_popup
-
     BoxLayout:
         orientation: "vertical"
 
         Label:
-            text: k_loading_popup.text
+            text: root.text
         KProgressIndicator:
 
 <KStatusPopup>:
-    id: k_status_popup
-
     BoxLayout:
         orientation: "vertical"
 
         Label:
-            text: k_status_popup.text
+            text: root.text
         KButton:
-            on_press: k_status_popup.dismiss()
+            on_press: root.dismiss()
             text: "OK"

@@ -6,8 +6,6 @@
     font_size: dp(32)
 
 <EditScreen>:
-    id: edit_screen
-
     BoxLayout:
         orientation: "vertical"
 
@@ -29,15 +27,15 @@
                 KIconButton:
                     icon_text: "\uef63"
                     on_press: carousel.index = 0
-                    text: str(edit_screen.price)
+                    text: str(root.price)
                 KIconButton:
                     icon_text: "\ue8cc"
                     on_press: carousel.index = 1
-                    text: str(edit_screen.product_count)
+                    text: str(root.product_count)
 
             KIconButton:
                 icon_text: "\ue5ca"
-                on_press: edit_screen.submit()
+                on_press: root.submit()
                 size_hint_x: 0.15
 
         Carousel:
