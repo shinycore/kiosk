@@ -9,7 +9,7 @@ storage = Storage()
 
 
 def add_entry():
-    json = request.get_json()
+    json = request.get_json() or {}
 
     try:
         price: int = json["price"]

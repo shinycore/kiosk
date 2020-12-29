@@ -1,13 +1,29 @@
+import json
+
 from kivy import Config
 from kivy.app import App
-from kivy.properties import AliasProperty, DictProperty, NumericProperty
+from kivy.network.urlrequest import UrlRequest
+from kivy.properties import AliasProperty, DictProperty, NumericProperty, StringProperty
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.togglebutton import ToggleButton
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
+
+
+def _submit_succeeded(request, result):
+    StatusModalView(text="Success").open()
+
+
+def _submit_failed(request, result):
+    StatusModalView(text="Failure").open()
+
+
+class StatusModalView(ModalView):
+    text = StringProperty()
 
 
 class EditScreen(Screen):
@@ -55,6 +71,16 @@ class EditScreen(Screen):
             button = ToggleButton(text=f"Product {id_ + 1}")
             button.on_press = lambda id_copy=id_, button_copy=button: self._toggle_product_id(id_copy, button_copy)
             products_keypad.add_widget(button)
+
+    def submit(self):
+        UrlRequest(
+            "http://localhost:5000",
+            method="POST",
+            req_body=json.dumps({"price": self.price, "product_ids": list(self.product_ids.keys())}),
+            req_headers={"Content-Type": "application/json"},
+            on_success=_submit_succeeded,
+            on_failure=_submit_failed
+        )
 
 
 class ListScreen(Screen):
