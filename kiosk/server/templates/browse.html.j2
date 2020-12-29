@@ -7,7 +7,7 @@
     </style>
 </head>
 <body>
-    <p>Downloaded on {{ now.astimezone() }}</p>
+    <header>Downloaded on {{ now.astimezone() }}</header>
     <main>
         {% for entry in entries %}
             <section id="entry{{ entry.id }}">
@@ -24,6 +24,10 @@
             </section>
         {% endfor %}
     </main>
+    <footer>
+        Copyright &copy 2020-2021 &vert; Some components of this software are
+        <a href="https://github.com/shinycore/kiosk" target="_blank">open-source</a>
+    </footer>
 
     <script type="text/javascript">
         function del(idx) {
