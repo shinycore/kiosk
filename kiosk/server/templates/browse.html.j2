@@ -11,20 +11,15 @@
     <main>
         {% for entry in entries %}
             <section id="entry{{ entry.id }}">
-                <p>{{ entry.date }}
-                    <button onclick="del({{ entry.id }})">Delete</button>
-                </p>
-                <ul>
-                    <li>ID: {{ entry.id }}</li>
-                    <li>Price: {{ entry.price }}</li>
-                    <li>Products:
-                        <ul>
-                            {% for pid, product in entry.products %}
-                                <li>{{ product }} ({{ pid }})</li>
-                            {% endfor %}
-                        </ul>
-                        {{ entry.product_ids }}
-                    </li>
+                <span class="entry-id">#{{ entry.id }}</span>
+                <span class="entry-date">{{ entry.date }}</span>
+                <button class="entry-button" onclick="del({{ entry.id }})">Delete</button>
+                <span class="entry-price">{{ entry.price }}</span>
+
+                <ul class="entry-products">
+                    {% for pid, product in entry.products %}
+                        <li>{{ product }} ({{ pid }})</li>
+                    {% endfor %}
                 </ul>
             </section>
         {% endfor %}

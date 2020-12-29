@@ -12,6 +12,40 @@ main {
 
 section {
     border: 1px solid black;
+    column-gap: 8px;
+    display: grid;
+    grid-template-areas:
+        "entry-id entry-date entry-button"
+        "entry-price entry-price entry-price"
+        "entry-products entry-products entry-products";
+    grid-template-columns: min-content auto min-content;
+    grid-template-rows: min-content min-content auto;
+    padding: 8px;
+    row-gap: 8px;
+}
+
+.entry-button {
+    grid-area: entry-button;
+}
+
+.entry-date {
+    grid-area: entry-date;
+}
+
+.entry-id {
+    grid-area: entry-id;
+}
+
+.entry-price {
+    grid-area: entry-price;
+}
+
+.entry-products {
+    grid-area: entry-products;
+}
+
+.entry-button, .entry-date, .entry-id {
+    align-self: center;
 }
 
 @media (min-width: 360px) {
