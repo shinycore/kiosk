@@ -7,7 +7,9 @@ license = "ISC"
 
 [tool.poetry.dependencies]
 python = "^3.7"
+flask = "^1.1.2"
 kivy = "^2.0.0"
+python-dotenv = "^0.15.0"
 
 [tool.poetry.dev-dependencies]
 
