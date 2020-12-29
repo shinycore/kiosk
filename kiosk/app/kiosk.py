@@ -1,4 +1,5 @@
 import json
+import weakref
 
 from kivy import Config
 from kivy.app import App
@@ -24,6 +25,18 @@ def _submit_failed(request, result):
 
 class StatusModalView(ModalView):
     text = StringProperty()
+    prev = None
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        ref = StatusModalView.prev  # no walruses in 3.7
+        if ref:
+            modal: "StatusModalView" = ref()
+            if modal:
+                modal.dismiss()
+
+        StatusModalView.prev = weakref.ref(self)
 
 
 class EditScreen(Screen):
@@ -73,6 +86,7 @@ class EditScreen(Screen):
             products_keypad.add_widget(button)
 
     def submit(self):
+        StatusModalView(text="Please wait...").open()
         UrlRequest(
             "http://localhost:5000",
             method="POST",
