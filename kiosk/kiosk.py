@@ -3,13 +3,14 @@ from kivy.app import App
 from kivy.properties import AliasProperty, DictProperty, NumericProperty
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.uix.togglebutton import ToggleButton
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
 
 
-class KioskApp(App):
+class EditScreen(Screen):
     price = NumericProperty()
     product_ids = DictProperty()  # there's no SetProperty, this is the closest match
 
@@ -37,7 +38,7 @@ class KioskApp(App):
             self.product_ids[id_] = None
 
     def build(self):
-        price_keypad: GridLayout = self.root.ids.price_keypad
+        price_keypad: GridLayout = self.ids.price_keypad
 
         for char in "7890456.123":
             button = Button(text=char)
@@ -48,9 +49,19 @@ class KioskApp(App):
         button.on_press = lambda: self._delete_price_char()
         price_keypad.add_widget(button)
 
-        products_keypad: GridLayout = self.root.ids.products_keypad
+        products_keypad: GridLayout = self.ids.products_keypad
 
         for id_ in range(6):
             button = ToggleButton(text=f"Product {id_ + 1}")
             button.on_press = lambda id_copy=id_, button_copy=button: self._toggle_product_id(id_copy, button_copy)
             products_keypad.add_widget(button)
+
+
+class KioskApp(App):
+    def build(self):
+        sm = ScreenManager()
+        sm.add_widget(EditScreen(name="edit"))
+
+        sm.get_screen("edit").build()
+
+        return sm

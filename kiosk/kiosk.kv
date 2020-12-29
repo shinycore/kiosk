@@ -1,29 +1,32 @@
-BoxLayout:
-    orientation: "vertical"
+<EditScreen>:
+    id: edit_screen
 
     BoxLayout:
-        orientation: "horizontal"
-        size_hint_y: 0.1
+        orientation: "vertical"
 
-        Button:
-            text: "List"
-        Button:
-            text: str(app.price)
-            on_press: carousel.index = 0
-        Button:
-            text: str(app.product_count)
-            on_press: carousel.index = 1
-        Button:
-            text: "Submit"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
 
-    Carousel:
-        id: carousel
-        scroll_timeout: 0
-        size_hint_y: 0.9
+            Button:
+                text: "List"
+            Button:
+                text: str(edit_screen.price)
+                on_press: carousel.index = 0
+            Button:
+                text: str(edit_screen.product_count)
+                on_press: carousel.index = 1
+            Button:
+                text: "Submit"
 
-        GridLayout:
-            id: price_keypad
-            cols: 4
-        GridLayout:
-            id: products_keypad
-            cols: 2
+        Carousel:
+            id: carousel
+            scroll_timeout: 0
+            size_hint_y: 0.9
+
+            GridLayout:
+                id: price_keypad
+                cols: 4
+            GridLayout:
+                id: products_keypad
+                cols: 2
