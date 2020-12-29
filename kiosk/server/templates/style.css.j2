@@ -6,9 +6,20 @@
 
 body {
     background-color: var(--background-bottom);
-    font-family: "-apple-system", "system-ui", "Arial", sans-serif;
     margin: 16px;
     max-width: 312px;
+}
+
+button {
+    background-color: var(--background-top);
+    border: 0;
+    padding: 8px 0;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: var(--background-bottom);
+    cursor: pointer;
 }
 
 main {
@@ -32,6 +43,10 @@ section {
     grid-template-rows: min-content min-content auto;
     padding: 8px;
     row-gap: 8px;
+}
+
+body, button {
+    font: 16px "-apple-system", "system-ui", "Arial", sans-serif;
 }
 
 .entry-button {
