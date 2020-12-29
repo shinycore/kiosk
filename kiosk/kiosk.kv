@@ -9,12 +9,16 @@ BoxLayout:
             text: "List"
         Button:
             text: "0"
+            on_press: carousel.index = 0
         Button:
             text: "0"
+            on_press: carousel.index = 1
         Button:
             text: "Submit"
 
     Carousel:
+        id: carousel
+        scroll_timeout: 0
         size_hint_y: 0.9
 
         GridLayout:
