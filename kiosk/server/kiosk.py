@@ -24,8 +24,22 @@ def add_entry():
     return "", http.HTTPStatus.CREATED
 
 
+def delete_entry(idx: int):
+    try:
+        del storage[idx]
+    except IndexError:
+        abort(http.HTTPStatus.NOT_FOUND)
+    else:
+        return "", http.HTTPStatus.OK
+
+
 def browse():
-    return render_template("browse.html.j2", storage=storage, now=datetime.now().replace(microsecond=0))
+    entries = [
+        {"id": id_, "date": entry.date, "price": entry.price, "product_ids": entry.product_ids}
+        for id_, entry in storage.to_dict().items()
+    ]
+
+    return render_template("browse.html.j2", entries=entries, now=datetime.now().replace(microsecond=0))
 
 
 def create_app():
@@ -34,5 +48,6 @@ def create_app():
     app.add_url_rule("/", browse.__name__, browse, methods=("GET",))
 
     app.add_url_rule("/", add_entry.__name__, add_entry, methods=("POST",))
+    app.add_url_rule("/entry/<int:idx>", delete_entry.__name__, delete_entry, methods=("DELETE",))
 
     return app

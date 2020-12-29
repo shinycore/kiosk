@@ -10,12 +10,28 @@
 </head>
 <body>
     <p><b>Current time: {{ now.astimezone() }}</b></p>
-    {% for entry in storage %}
-        <p>{{ entry.date }}</p>
-        <ul>
-            <li>Price: {{ entry.price }}</li>
-            <li>Product IDs: {{ entry.product_ids }}</li>
-        </ul>
+    {% for entry in entries %}
+        <div id="entry{{ entry.id }}">
+            <p>{{ entry.date }}
+                <button onclick="del({{ entry.id }})">Delete</button>
+            </p>
+            <ul>
+                <li>ID: {{ entry.id }}</li>
+                <li>Price: {{ entry.price }}</li>
+                <li>Product IDs: {{ entry.product_ids }}</li>
+            </ul>
+        </div>
     {% endfor %}
+
+    <script type="text/javascript">
+        function del(idx) {
+            fetch("/entry/" + idx, {method: "DELETE"}).then((res) => {
+                if (res.ok) {
+                    const div = document.getElementById("entry" + idx);
+                    div.style.color = "lightgray";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
