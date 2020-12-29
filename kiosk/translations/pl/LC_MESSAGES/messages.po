@@ -10,6 +10,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
+#: kiosk/app/kiosk.kv:80
+msgid "You can manage saved items using web browser on another device"
+msgstr ""
+"Możesz zarządzać zapisanymi elementami przy użyciu przeglądarki "
+"internetowej na innym urządzeniu"
+
+#: kiosk/app/kiosk.kv:85
+msgid "Show IP address(es)"
+msgstr "Pokaż adres(y) IP"
+
+#: kiosk/app/kiosk.py:61
+msgid "Saved"
+msgstr "Zapisano"
+
+#: kiosk/app/kiosk.py:65
+msgid "Could not save"
+msgstr "Nie można zapisać"
+
+#: kiosk/app/kiosk.py:91
+msgid "Saving"
+msgstr "Zapisywanie"
+
+#: kiosk/app/kiosk.py:110
+msgid "No network connection"
+msgstr "Brak połączenia sieciowego"
+
 #: kiosk/server/templates/browse.html.j2:11
 #, python-format
 msgid "%(num)d entry"
@@ -25,3 +51,4 @@ msgstr "Pobrano"
 #: kiosk/server/templates/browse.html.j2:19
 msgid "Delete"
 msgstr "Usuń"
+

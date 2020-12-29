@@ -1,3 +1,4 @@
+import gettext
 import json
 
 from kivy import Config
@@ -13,6 +14,11 @@ from .components.popup import KLoadingPopup, KStatusPopup
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
+
+tr = gettext.translation("messages", "kiosk/translations", fallback=True)
+tr.install()
+
+_ = tr.gettext
 
 
 class EditScreen(Screen):
@@ -52,11 +58,11 @@ class EditScreen(Screen):
         for button in self.ids.products_keypad.children:
             button.state = "normal"
 
-        KStatusPopup(text="Saved").open()
+        KStatusPopup(text=_("Saved")).open()
 
     @staticmethod
     def _submit_failed(*args):
-        KStatusPopup(text="Could not save").open()
+        KStatusPopup(text=_("Could not save")).open()
 
     def build(self):
         price_keypad: GridLayout = self.ids.price_keypad
@@ -82,7 +88,7 @@ class EditScreen(Screen):
             products_keypad.add_widget(button)
 
     def submit(self):
-        KLoadingPopup(text="Saving").open()
+        KLoadingPopup(text=_("Saving")).open()
         UrlRequest(
             "http://localhost:5000",
             method="POST",
@@ -101,7 +107,7 @@ class ListScreen(Screen):
         if ip_address:
             text = f"{ip_address}"
         else:
-            text = "No network connection"
+            text = _("No network connection")
 
         KStatusPopup(text=text).open()
 
