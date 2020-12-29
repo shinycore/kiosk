@@ -29,10 +29,10 @@
             spacing: 8
             size_hint_y: 0.2
 
-            KButton:
+            KIconButton:
+                icon_text: "\ue889"
                 on_press: app.root.current = "list"
                 size_hint_x: 0.15
-                text: "List"
 
             BoxLayout:
                 orientation: "horizontal"
@@ -43,14 +43,14 @@
                     on_press: carousel.index = 0
                     text: str(edit_screen.price)
                 KIconButton:
-                    icon_text: "\ue834"
+                    icon_text: "\ue8cc"
                     on_press: carousel.index = 1
                     text: str(edit_screen.product_count)
 
-            KButton:
+            KIconButton:
+                icon_text: "\ue5ca"
                 on_press: edit_screen.submit()
                 size_hint_x: 0.15
-                text: "Submit"
 
         Carousel:
             id: carousel
@@ -74,10 +74,10 @@
             spacing: 8
             size_hint_y: 0.2
 
-            KButton:
+            KIconButton:
+                icon_text: "\ue5c4"
                 on_press: app.root.current = "edit"
                 size_hint_x: 0.15
-                text: "Edit"
             Widget:
                 size_hint_x: 0.7
             Widget:

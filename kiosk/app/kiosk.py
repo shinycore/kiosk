@@ -10,7 +10,7 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import NoTransition, Screen, ScreenManager
 
 from ..utils import get_ip_address, get_product_names
-from .components.button import KButton, KToggleButton
+from .components.button import KButton, KIconButton, KToggleButton
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
@@ -87,7 +87,7 @@ class EditScreen(Screen):
 
             price_keypad.add_widget(button)
 
-        button = KButton(text="Backspace")
+        button = KIconButton(icon_text="\ue14a")
         button.on_press = lambda: self._delete_price_char()
         price_keypad.add_widget(button)
 
