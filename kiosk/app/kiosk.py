@@ -5,13 +5,12 @@ from kivy import Config
 from kivy.app import App
 from kivy.network.urlrequest import UrlRequest
 from kivy.properties import AliasProperty, DictProperty, NumericProperty, StringProperty
-from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import NoTransition, Screen, ScreenManager
-from kivy.uix.togglebutton import ToggleButton
 
 from ..utils import get_ip_address, get_product_names
+from .components.button import KButton, KToggleButton
 
 Config.set("graphics", "width", 480)
 Config.set("graphics", "height", 320)
@@ -54,7 +53,7 @@ class EditScreen(Screen):
         except ValueError:
             return
 
-    def _toggle_product_id(self, id_: int, button: ToggleButton):
+    def _toggle_product_id(self, id_: int, button: KToggleButton):
         if button.state == "normal":
             try:
                 del self.product_ids[id_]
@@ -81,21 +80,21 @@ class EditScreen(Screen):
 
         for char in (7, 8, 9, 0, 4, 5, 6, None, 1, 2, 3):
             if char is None:
-                button = Button()
+                button = KButton()
             else:
-                button = Button(text=str(char))
+                button = KButton(text=str(char))
                 button.on_press = lambda char_copy=char: self._add_price_char(char_copy)
 
             price_keypad.add_widget(button)
 
-        button = Button(text="Backspace")
+        button = KButton(text="Backspace")
         button.on_press = lambda: self._delete_price_char()
         price_keypad.add_widget(button)
 
         products_keypad: GridLayout = self.ids.products_keypad
 
         for id_, name in enumerate(get_product_names()):
-            button = ToggleButton(text=name)
+            button = KToggleButton(text=name)
             button.on_press = lambda id_copy=id_, button_copy=button: self._toggle_product_id(id_copy, button_copy)
             products_keypad.add_widget(button)
 

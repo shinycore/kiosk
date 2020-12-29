@@ -1,3 +1,5 @@
+#:include kiosk/app/components/button.kv
+
 <StatusModalView>:
     id: status_modal
     auto_dismiss: False
@@ -7,7 +9,7 @@
 
         Label:
             text: status_modal.text
-        Button:
+        KButton:
             text: "OK"
             on_press: status_modal.dismiss()
 
@@ -23,7 +25,7 @@
             spacing: 8
             size_hint_y: 0.2
 
-            Button:
+            KButton:
                 on_press: app.root.current = "list"
                 size_hint_x: 0.15
                 text: "List"
@@ -32,14 +34,14 @@
                 orientation: "horizontal"
                 size_hint_x: 0.7
 
-                Button:
+                KButton:
                     on_press: carousel.index = 0
                     text: str(edit_screen.price)
-                Button:
+                KButton:
                     on_press: carousel.index = 1
                     text: str(edit_screen.product_count)
 
-            Button:
+            KButton:
                 on_press: edit_screen.submit()
                 size_hint_x: 0.15
                 text: "Submit"
@@ -66,7 +68,7 @@
             spacing: 8
             size_hint_y: 0.2
 
-            Button:
+            KButton:
                 on_press: app.root.current = "edit"
                 size_hint_x: 0.15
                 text: "Edit"
@@ -84,7 +86,7 @@
                 halign: "center"
                 text: "Please open web browser and navigate to this location:"
                 text_size: root.width, None
-            Button:
+            KButton:
                 on_press: root._show_ip_address()
                 text: "Show my IP address"
             Label:

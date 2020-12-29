@@ -1,0 +1,18 @@
+<KBaseButton, KBaseToggleButton>:
+    background_normal: "atlas://data/images/defaulttheme/button"
+    background_down: "atlas://data/images/defaulttheme/button_pressed"
+    padding: 16
+
+    canvas:
+        BorderImage:
+            pos: self.pos
+            size: self.size
+            source: self.background_normal if self.state == "normal" else self.background_down
+
+<KButton, KToggleButton>:
+    id: k_button
+
+    Label:
+        halign: "center"
+        text: k_button.text
+        text_size: self.width, None
