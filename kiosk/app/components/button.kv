@@ -1,7 +1,8 @@
 <KBaseButton, KBaseToggleButton>:
     background_normal: "atlas://data/images/defaulttheme/button"
     background_down: "atlas://data/images/defaulttheme/button_pressed"
-    padding: 16
+    orientation: "horizontal"
+    padding: 8
 
     canvas:
         BorderImage:
@@ -16,3 +17,19 @@
         halign: "center"
         text: k_button.text
         text_size: self.width, None
+
+<KIconButton>:
+    id: k_icon_button
+    spacing: 8
+
+    Widget:
+    Label:
+        font_name: "kiosk/app/fonts/MaterialIconsOutlined-Regular.otf"
+        size: self.texture_size
+        size_hint_x: None
+        text: k_icon_button.icon_text
+    Label:
+        size: self.texture_size
+        size_hint_x: None
+        text: k_icon_button.text
+    Widget:

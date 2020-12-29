@@ -15,5 +15,10 @@ class KButton(KBaseButton):
     text = StringProperty()
 
 
+class KIconButton(KBaseButton):
+    icon_text = StringProperty()
+    text = StringProperty()
+
+
 class KToggleButton(KBaseToggleButton):
     text = StringProperty()

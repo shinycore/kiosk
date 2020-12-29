@@ -38,10 +38,12 @@
                 orientation: "horizontal"
                 size_hint_x: 0.7
 
-                KButton:
+                KIconButton:
+                    icon_text: "\uef63"
                     on_press: carousel.index = 0
                     text: str(edit_screen.price)
-                KButton:
+                KIconButton:
+                    icon_text: "\ue834"
                     on_press: carousel.index = 1
                     text: str(edit_screen.product_count)
 
