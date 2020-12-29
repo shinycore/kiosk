@@ -42,6 +42,18 @@ section {
 
 .entry-products {
     grid-area: entry-products;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.entry-products > li {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.entry-products > li:not(:last-child) {
+    margin-bottom: 8px;
 }
 
 .entry-button, .entry-date, .entry-id {
