@@ -19,25 +19,35 @@
 
         BoxLayout:
             orientation: "horizontal"
-            size_hint_y: 0.1
+            padding: 8
+            spacing: 8
+            size_hint_y: 0.2
 
             Button:
-                text: "List"
                 on_press: app.root.current = "list"
+                size_hint_x: 0.15
+                text: "List"
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_x: 0.7
+
+                Button:
+                    on_press: carousel.index = 0
+                    text: str(edit_screen.price)
+                Button:
+                    on_press: carousel.index = 1
+                    text: str(edit_screen.product_count)
+
             Button:
-                text: str(edit_screen.price)
-                on_press: carousel.index = 0
-            Button:
-                text: str(edit_screen.product_count)
-                on_press: carousel.index = 1
-            Button:
-                text: "Submit"
                 on_press: edit_screen.submit()
+                size_hint_x: 0.15
+                text: "Submit"
 
         Carousel:
             id: carousel
             scroll_timeout: 0
-            size_hint_y: 0.9
+            size_hint_y: 0.8
 
             GridLayout:
                 id: price_keypad
@@ -52,18 +62,22 @@
 
         BoxLayout:
             orientation: "horizontal"
-            size_hint_y: 0.1
+            padding: 8
+            spacing: 8
+            size_hint_y: 0.2
 
             Button:
-                text: "Edit"
                 on_press: app.root.current = "edit"
+                size_hint_x: 0.15
+                text: "Edit"
             Widget:
+                size_hint_x: 0.7
             Widget:
-            Widget:
+                size_hint_x: 0.15
 
         BoxLayout:
             orientation: "vertical"
-            size_hint_y: 0.9
+            size_hint_y: 0.8
 
             Widget:
             Label:
